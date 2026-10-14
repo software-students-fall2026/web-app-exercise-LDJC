@@ -8,8 +8,17 @@ Jobify is a mobile web app that lets job seekers record, track and update every 
 
 ## User stories
 
-See instructions. Delete this line and place a link to the user stories here.
+1. As a job seeker, I want to see all my applications in one list so that I have an overview of every job I’ve applied.
 
+2.  As a -, I want - so that - 
+3.  As a -, I want - so that - 
+4.  As a -, I want - so that - 
+5.  As a -, I want - so that - 
+6.  As a -, I want - so that - 
+7.  As a -, I want - so that - 
+8.  As a -, I want - so that - 
+9.  As a -, I want - so that - 
+10.  As a -, I want - so that -
 ## Steps necessary to run the software
 
 See instructions. Delete this line and place instructions to download, configure, and run the software here.
