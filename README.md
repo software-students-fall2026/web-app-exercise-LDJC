@@ -4,7 +4,7 @@ A little exercise to build a web application following an agile development proc
 
 ## Product vision statement
 
-Jobify is a mobile web app that allows for job seekers to record and track every application they send out its to keep all necessary information in one spot.
+Jobify is a mobile web app that lets job seekers record, track and update every application they send out, keeping all the important information in one place.
 
 ## User stories
 
