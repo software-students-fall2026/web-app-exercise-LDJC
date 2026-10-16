@@ -1,0 +1,204 @@
+
+.mobile-app {
+    width: 100%;
+    max-width: 430px;
+    min-height: 100dvh;
+    margin: 0 auto;
+    padding-bottom: 95px;
+    background-color: #f7f7f7;
+}
+
+
+.add-header {
+    height: 76px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #dddddd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+}
+
+.add-header h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.back-link {
+    position: absolute;
+    left: 18px;
+
+    display: flex;
+    align-items: center;
+    gap: 4px;
+
+    color: #2851c9;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.back-arrow {
+    font-size: 28px;
+    line-height: 1;
+}
+
+
+.add-content {
+    padding: 22px 18px 40px;
+}
+
+.required-note {
+    font-size: 15px;
+    color: #666666;
+    margin: 0 0 20px;
+}
+
+.required-star {
+    color: #c62828;
+    font-weight: 700;
+}
+
+
+.add-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+}
+
+.form-group label {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222222;
+}
+
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    display: block;
+    width: 100%;
+    min-width: 0;
+
+    padding: 13px 14px;
+
+    border: 1px solid #c7c7c7;
+    border-radius: 10px;
+
+    background-color: white;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #202020;
+
+    outline: none;
+}
+
+.form-group input,
+.form-group select {
+    height: 48px;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #808080;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2851c9;
+}
+
+
+.date-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 12px;
+}
+
+.date-row input {
+    font-size: 14px;
+    padding: 8px;
+}
+
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.5;
+}
+
+
+.save-button {
+    width: 100%;
+    height: 58px;
+
+    margin-top: 2px;
+
+    background-color: #2851c9;
+    color: white;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.save-button:hover {
+    background-color: #1f43af;
+}
+
+
+.cancel-link {
+    display: block;
+    text-align: center;
+
+    color: #444444;
+    font-size: 17px;
+    font-weight: 600;
+
+    text-decoration: underline;
+    margin-top: 4px;
+}
+
+
+@media (max-width: 360px) {
+
+    .add-header h1 {
+        font-size: 19px;
+    }
+
+    .back-link {
+        left: 12px;
+        font-size: 15px;
+    }
+
+    .add-content {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .date-row {
+        gap: 8px;
+    }
+
+    .date-row input {
+        padding: 6px;
+        font-size: 12px;
+    }
+}
