@@ -1,11 +1,11 @@
 import os
 import certifi
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import pymongo
 from bson.objectid import ObjectId
 
-load_dotenv()  # read .env
+load_dotenv() 
 
 
 def create_app():
@@ -16,7 +16,7 @@ def create_app():
         client = pymongo.MongoClient(
             os.getenv("MONGO_URI"),
             serverSelectionTimeoutMS=5000,
-            tlsCAFile=certifi.where(),  # trusted certificate list (fixes CERTIFICATE_VERIFY_FAILED on Mac)
+            tlsCAFile=certifi.where(),  
         )
         db = client[os.getenv("MONGO_DBNAME", "job_tracker")]
         client.admin.command("ping")
@@ -25,19 +25,52 @@ def create_app():
         print(" * MongoDB connection error:", e)
         print(" * Check MONGO_URI in your .env file")
 
-    # Screen 1: all applications
     @app.route("/")
     def home():
         return render_template("index.html")
 
-    # TODO Screen 2: GET  /applications/<app_id>              -> detail.html
-    # TODO Screen 3: GET + POST /applications/new             -> add.html
-    # TODO Screen 4: GET + POST /applications/<app_id>/edit   -> edit.html
-    # TODO Screen 5: GET + POST /applications/<app_id>/delete -> delete.html
-    # TODO Screen 6: GET  /search?q=...                       -> search.html
+    @app.route("/applications/new", methods=["GET", "POST"])
+    def add_application():
 
+        if request.method == "POST":
+
+            company = request.form.get("company", "").strip()
+            position = request.form.get("position", "").strip()
+            status = request.form.get("status", "Wishlist")
+            date_applied = request.form.get("date_applied", "")
+            application_deadline = request.form.get(
+                "application_deadline", ""
+            )
+            job_url = request.form.get("job_url", "").strip()
+            notes = request.form.get("notes", "").strip()
+
+            if not company or not position:
+                return "Company and position are required", 400
+
+            new_application = {
+                "company": company,
+                "position": position,
+                "status": status,
+                "date_applied": date_applied,
+                "application_deadline": application_deadline,
+                "job_url": job_url,
+                "notes": notes
+            }
+
+            if db is None:
+                return "Database connection unavailable", 503
+
+            db.applications.insert_one(new_application)
+
+            return redirect(url_for("home"))
+
+        return render_template("add.html")
+    
+    @app.route("/graphics/<path:filename>")
+    def graphics(filename):
+        return send_from_directory("graphics", filename)
+    
     return app
-
 
 app = create_app()
 
