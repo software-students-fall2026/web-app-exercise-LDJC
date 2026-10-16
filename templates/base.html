@@ -1,22 +1,78 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}Job Tracker{% endblock %}</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Jobify</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    {% block styles %}{% endblock %}
 </head>
-<body>
-  <header>
-    <h1>Job Tracker</h1>
-    <nav>
-      <a href="/">All</a>
-      <a href="/applications/new">Add</a>
-      <a href="/search">Search</a>
+
+{% if request.endpoint != 'add_application' %}
+<header class="app-header">
+    <a href="{{ url_for('home') }}" class="logo-link">
+        <img
+            src="{{ url_for('graphics', filename='jobify_logo.svg') }}"
+            alt="Jobify"
+            class="jobify-logo"
+        >
+    </a>
+</header>
+{% endif %}
+
+  {% block content %}{% endblock %}
+
+  <nav class="bottom-nav">
+
+        <a href="{{ url_for('home') }}" class="nav-item">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <line x1="8" y1="6" x2="21" y2="6"/>
+                <line x1="8" y1="12" x2="21" y2="12"/>
+                <line x1="8" y1="18" x2="21" y2="18"/>
+                <circle cx="3" cy="6" r="1"/>
+                <circle cx="3" cy="12" r="1"/>
+                <circle cx="3" cy="18" r="1"/>
+            </svg>
+
+            <span>Applications</span>
+        </a>
+
+        <a href="/search" class="nav-item">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <circle cx="11" cy="11" r="7"/>
+                <line x1="16" y1="16" x2="22" y2="22"/>
+            </svg>
+
+            <span>Search</span>
+        </a>
+
+        <a href="{{ url_for('add_application') }}" class="nav-item">
+
+            <svg viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor"
+                 stroke-width="2">
+                <line x1="12" y1="4" x2="12" y2="20"/>
+                <line x1="4" y1="12" x2="20" y2="12"/>
+            </svg>
+
+            <span>Add</span>
+        </a>
+
     </nav>
-  </header>
-  <main>
-    {% block content %}{% endblock %}
-  </main>
+
 </body>
 </html>
