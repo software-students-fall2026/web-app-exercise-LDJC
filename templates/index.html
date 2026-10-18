@@ -5,8 +5,26 @@
 <main class="applications-page">
     <div class="applications-heading">
         <h1>My Applications</h1>
+        <span class="application-count">{{ applications|length }} applications</span>
     </div>
 
+    <div class="application-list">
+        {% for application in applications %}
+            <a href="{{ url_for('application_detail', app_id=application._id) }}" class="application-card">
+                <div class="application-card-top">
+                    <p class="application-company">{{ application.company }}</p>
+                    <span class="status-badge status-{{ application.status|lower }}">{{ application.status }}</span>
+                </div>
+                <p class="application-position">{{ application.position }}</p>
+                {% if application.date_applied %}
+                    <p class="application-date">Applied {{ application.date_applied }}</p>
+                {% elif application.application_deadline %}
+                    <p class="application-date">Deadline {{ application.application_deadline }}</p>
+                {% endif %}
+            </a>
+        {% else %}
+            <p>No applications yet. Add your first one!</p>
+        {% endfor %}
+    </div>
 </main>
-
 {% endblock %}

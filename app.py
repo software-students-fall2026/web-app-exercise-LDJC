@@ -27,8 +27,29 @@ def create_app():
 
     @app.route("/")
     def home():
-        return render_template("index.html")
+        applications = []
+        if db is not None:
+            applications = list(db.applications.find().sort("_id", -1)) #decending order
 
+        return render_template("index.html", applications=applications)
+    
+    @app.route("/applications/<app_id>")
+    def application_detail(app_id):
+
+        if db is None:
+            return "Database connection unavailable", 503
+
+        try:
+            application = db.applications.find_one({"_id": ObjectId(app_id)})
+        except Exception:
+            application = None
+
+        if application is None:
+            return "Application not found", 404
+
+        return render_template("detail.html", application=application)
+    
+    
     @app.route("/applications/new", methods=["GET", "POST"])
     def add_application():
 
