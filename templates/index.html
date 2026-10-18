@@ -5,7 +5,12 @@
 <main class="applications-page">
     <div class="applications-heading">
         <h1>My Applications</h1>
+        <span class="application-count">{{ applications|length }} applications</span>
     </div>
+
+    {% for application in applications %}
+        <p>{{ application.company }} - {{ application.position }}</p>
+    {% endfor %}
 
 </main>
 

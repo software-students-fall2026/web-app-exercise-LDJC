@@ -27,7 +27,11 @@ def create_app():
 
     @app.route("/")
     def home():
-        return render_template("index.html")
+        applications = []
+        if db is not None:
+            applications = list(db.applications.find().sort("_id", -1)) #decending order
+
+        return render_template("index.html", applications=applications)
 
     @app.route("/applications/new", methods=["GET", "POST"])
     def add_application():
