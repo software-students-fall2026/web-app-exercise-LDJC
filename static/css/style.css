@@ -102,10 +102,13 @@ body {
 }
 
 .application-card {
+    display: block;
     padding: 16px;
     background-color: #ffffff;
     border: 1px solid #d8d8d8;
     border-radius: 14px;
+    color: inherit;
+    text-decoration: none;
 }
 
 .application-card-top {
