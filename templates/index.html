@@ -8,10 +8,23 @@
         <span class="application-count">{{ applications|length }} applications</span>
     </div>
 
-    {% for application in applications %}
-        <p>{{ application.company }} - {{ application.position }}</p>
-    {% endfor %}
-
+    <div class="application-list">
+        {% for application in applications %}
+        <div class="application-card">
+            <div class="application-card-top">
+                <p class="application-company">{{ application.company }}</p>
+                <span class="status-badge status-{{ application.status|lower }}">{{ application.status }}</span>
+            </div>
+            <p class="application-position">{{ application.position }}</p>
+            {% if application.date_applied %}
+            <p class="application-date">Applied {{ application.date_applied }}</p>
+            {% elif application.application_deadline %}
+            <p class="application-date">Deadline {{ application.application_deadline }}</p>
+            {% endif %}
+        </div>
+        {% else %}
+        <p>No applications yet. Add your first one!</p>
+        {% endfor %}
+    </div>
 </main>
-
 {% endblock %}
