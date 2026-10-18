@@ -1,0 +1,89 @@
+.detail-page {
+    padding: 18px 18px 105px;
+}
+
+.detail-back {
+    color: #2851c9;
+    font-size: 17px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.detail-top {
+    margin: 18px 0 20px;
+}
+
+.detail-top h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+.detail-position {
+    margin: 6px 0 12px;
+    font-size: 17px;
+    color: #444444;
+}
+
+.detail-card {
+    background-color: #ffffff;
+    border: 1px solid #d8d8d8;
+    border-radius: 14px;
+}
+
+.detail-row {
+    padding: 14px 16px;
+    border-bottom: 1px solid #eeeeee;
+}
+
+.detail-row:last-child {
+    border-bottom: none;
+}
+
+.detail-row p {
+    margin: 0;
+    font-size: 16px;
+}
+
+.detail-row .detail-label {
+    margin-bottom: 4px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #666666;
+    text-transform: uppercase;
+}
+
+.detail-row a {
+    color: #2851c9;
+    font-weight: 600;
+}
+
+.detail-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.edit-button,
+.delete-button {
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.edit-button {
+    background-color: #2851c9;
+    color: #ffffff;
+}
+
+.delete-button {
+    background-color: #ffffff;
+    color: #c62828;
+    border: 2px solid #c62828;
+}
