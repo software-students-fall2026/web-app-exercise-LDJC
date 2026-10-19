@@ -18,7 +18,7 @@
 <header class="app-header">
     <a href="{{ url_for('home') }}" class="logo-link">
         <img
-            src="{{ url_for('graphics', filename='jobify_logo.svg') }}"
+            src="/static/graphics/jobify_logo.svg"
             alt="Jobify"
             class="jobify-logo"
         >
@@ -26,50 +26,22 @@
 </header>
 {% endif %}
 
-  {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
   <nav class="bottom-nav">
 
         <a href="{{ url_for('home') }}" class="nav-item">
-
-            <svg viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2">
-                <line x1="8" y1="6" x2="21" y2="6"/>
-                <line x1="8" y1="12" x2="21" y2="12"/>
-                <line x1="8" y1="18" x2="21" y2="18"/>
-                <circle cx="3" cy="6" r="1"/>
-                <circle cx="3" cy="12" r="1"/>
-                <circle cx="3" cy="18" r="1"/>
-            </svg>
-
+            <img src="/static/graphics/view.svg" alt="" class="nav-icon">
             <span>Applications</span>
         </a>
 
-        <a href="/search" class="nav-item">
-
-            <svg viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2">
-                <circle cx="11" cy="11" r="7"/>
-                <line x1="16" y1="16" x2="22" y2="22"/>
-            </svg>
-
+        <a href="{{ url_for('home') }}" class="nav-item">
+            <img src="/static/graphics/magnifying_glass.svg" alt="" class="nav-icon">
             <span>Search</span>
         </a>
 
-        <a href="{{ url_for('add_application') }}" class="nav-item">
-
-            <svg viewBox="0 0 24 24"
-                 fill="none"
-                 stroke="currentColor"
-                 stroke-width="2">
-                <line x1="12" y1="4" x2="12" y2="20"/>
-                <line x1="4" y1="12" x2="20" y2="12"/>
-            </svg>
-
+        <a href="{{ url_for('home') }}" class="nav-item">
+            <img src="/static/graphics/plus_sign.svg" alt="" class="nav-icon">
             <span>Add</span>
         </a>
 
