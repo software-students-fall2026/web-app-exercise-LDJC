@@ -1,7 +1,7 @@
 import os
 import certifi
 from dotenv import load_dotenv
-from flask import Flask, render_template, request, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for
 import pymongo
 from bson.objectid import ObjectId
 
@@ -86,11 +86,6 @@ def create_app():
             return redirect(url_for("home"))
 
         return render_template("add.html")
-    
-    @app.route("/graphics/<path:filename>")
-    def graphics(filename):
-        return send_from_directory("graphics", filename)
-    
     return app
 
 app = create_app()
