@@ -1,5 +1,49 @@
 {% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/detail.css') }}">
+{% endblock %}
+
 {% block content %}
-  <h2>Application details</h2>
-  {# TODO: show one application #}
+
+<main class="detail-page">
+
+  <a href="{{ url_for('home') }}" class="detail-back">‹ Back</a>
+
+  <div class="detail-top">
+    <h1>{{ application.company }}</h1>
+    <p class="detail-position">{{ application.position }}</p>
+    <span class="status-badge status-{{ application.status|lower }}">{{ application.status }}</span>
+  </div>
+
+  <div class="detail-card">
+    <div class="detail-row">
+      <p class="detail-label">Date applied</p>
+      <p>{{ application.date_applied or "Not applied yet" }}</p>
+    </div>
+    <div class="detail-row">
+      <p class="detail-label">Application deadline</p>
+      <p>{{ application.application_deadline or "None" }}</p>
+    </div>
+    <div class="detail-row">
+      <p class="detail-label">Job posting</p>
+      {% if application.job_url %}
+      <a href="{{ application.job_url }}" target="_blank">View job posting</a>
+      {% else %}
+      <p>No link added</p>
+      {% endif %}
+    </div>
+    <div class="detail-row">
+      <p class="detail-label">Notes</p>
+      <p>{{ application.notes or "No notes" }}</p>
+    </div>
+  </div>
+
+  <div class="detail-buttons">
+    <a href="/applications/{{ application._id }}/edit" class="edit-button">Edit</a>
+    <a href="/applications/{{ application._id }}/delete" class="delete-button">Delete</a>
+  </div>
+
+</main>
+
 {% endblock %}
