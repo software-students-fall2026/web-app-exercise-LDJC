@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+<main class="applications-page">
   <h2>Search</h2>
-  {# TODO: search box (method="GET") + results #}
+  <form action="{{ url_for('search') }}" method="GET">
+    <input type="text" name="query" value="{{ query }}" placeholder="Search..." required>
+    <button type="submit">Search</button>
+  </form>
+</main>
 {% endblock %}

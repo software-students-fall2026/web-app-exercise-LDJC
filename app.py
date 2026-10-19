@@ -90,6 +90,13 @@ def create_app():
     @app.route("/graphics/<path:filename>")
     def graphics(filename):
         return send_from_directory("graphics", filename)
+       
+    @app.route("/search")
+    def search():
+        query = request.args.get("query", "").strip()
+        return render_template("search.html", query=query)
+
+ 
     
     return app
 
