@@ -86,9 +86,62 @@ def create_app():
             return redirect(url_for("home"))
 
         return render_template("add.html")
+
+    @app.route("/applications/<app_id>/edit", methods=["GET", "POST"])
+    def edit_application(app_id):
+
+        if db is None:
+            return "Database connection unavailable", 503
+
+        try:
+            application = db.applications.find_one({"_id": ObjectId(app_id)})
+        except Exception:
+            application = None
+
+        if application is None:
+            return "Application not found", 404
+
+        if request.method == "POST":
+
+            company = request.form.get("company", "").strip()
+            position = request.form.get("position", "").strip()
+
+            if not company or not position:
+                return "Company and position are required", 400
+
+            updated_fields = {
+                "company": company,
+                "position": position,
+                "status": request.form.get("status", "Wishlist"),
+                "date_applied": request.form.get("date_applied", ""),
+                "application_deadline": request.form.get("application_deadline", ""),
+                "job_url": request.form.get("job_url", "").strip(),
+                "notes": request.form.get("notes", "").strip(),
+            }
+
+            db.applications.update_one(
+                {"_id": application["_id"]},
+                {"$set": updated_fields},
+            )
+
+            return redirect(url_for("application_detail", app_id=app_id))
+
+        return render_template("edit.html",application=application)
+
+
+
+
     return app
 
 app = create_app()
+
+
+
+
+
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
