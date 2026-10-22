@@ -8,7 +8,7 @@ Jobify is a mobile web app that lets job seekers record, track and update every 
 
 ## User stories
 
-https://github.com/orgs/software-students-fall2026/projects/8/views/1
+The check out user stories, see our [project board](https://github.com/orgs/software-students-fall2026/projects/8/views/1). 
 ## Steps necessary to run the software
 
 See instructions. Delete this line and place instructions to download, configure, and run the software here.
