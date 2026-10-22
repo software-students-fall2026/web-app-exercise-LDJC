@@ -1,5 +1,17 @@
 {% extends "base.html" %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/edit.css') }}">
+{% endblock %}
 {% block content %}
   <h2>Edit application</h2>
-  {# TODO: pre-filled form + stage dropdown #}
+  <form class="edit-form" method="POST">
+    Company: <input name="company" value="{{ application.company }}" required>
+    Position: <input name="position" value="{{ application.position }}" required>
+    Status: <input name="status" value="{{ application.status }}">
+    Date applied: <input type="date" name="date_applied" value="{{ application.date_applied }}">
+    Deadline: <input type="date" name="application_deadline" value="{{ application.application_deadline }}">
+    Job link: <input name="job_url" value="{{ application.job_url }}">
+    Notes: <textarea name="notes">{{ application.notes }}</textarea>
+    <button type="submit">Save</button>
+  </form>
 {% endblock %}
