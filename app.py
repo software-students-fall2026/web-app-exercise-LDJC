@@ -128,7 +128,9 @@ def create_app():
 
         return render_template("edit.html",application=application)
 
-
+    @app.route("/search")
+    def search():
+        return render_template("search.html")
 
 
     return app
