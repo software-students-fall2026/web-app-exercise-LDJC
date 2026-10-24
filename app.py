@@ -1,4 +1,5 @@
 import os
+import re
 import certifi
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for
@@ -90,7 +91,16 @@ def create_app():
     @app.route("/search")
     def search():
         query = request.args.get("query", "").strip()
-        return render_template("search.html", query=query)
+        results = []
+
+        if query and db is not None:
+            pattern = {"$regex": re.escape(query), "$options": "i"}
+            results = list(db.applications.find(
+                {"$or": [{"company": pattern}, {"position": pattern}]}
+            ))
+
+        return render_template("search.html", query=query, results=results)
+
 
     @app.route("/applications/<app_id>/edit", methods=["GET", "POST"])
     def edit_application(app_id):
