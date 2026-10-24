@@ -3,15 +3,23 @@ import re
 import certifi
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for
+from flask_login import LoginManager, UserMixin
 import pymongo
 from bson.objectid import ObjectId
 
 load_dotenv() 
-
+class User(UserMixin):
+    def __init__(self, user_doc):
+        self.id = str(user_doc["_id"])
+        self.username = user_doc["username"]
 
 def create_app():
     app = Flask(__name__)
+    app.secret_key = os.getenv("SECRET_KEY")
 
+    login_manager = LoginManager(app)
+    login_manager.login_view = "login"
+    
     db = None
     try:
         client = pymongo.MongoClient(
@@ -25,6 +33,16 @@ def create_app():
     except Exception as e:
         print(" * MongoDB connection error:", e)
         print(" * Check MONGO_URI in your .env file")
+
+    @login_manager.user_loader
+    def load_user(user_id):
+        if db is None:
+            return None
+        try:
+            user_doc = db.users.find_one({"_id": ObjectId(user_id)})
+        except Exception:
+            return None
+        return User(user_doc) if user_doc else None
 
     @app.route("/")
     def home():
