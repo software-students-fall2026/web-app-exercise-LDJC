@@ -113,8 +113,7 @@ def create_app():
                 filters["status"] = status
             results = list(db.applications.find(filters))
 
-        return render_template("search.html", query=query, status=status,
-                               statuses=statuses, results=results)
+        return render_template("search.html", query=query, status=status, statuses=statuses, results=results)
 
 
 

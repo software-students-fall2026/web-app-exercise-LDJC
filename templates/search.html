@@ -10,9 +10,21 @@
         <img src="/static/graphics/magnifying_glass.svg" alt="" class="search-icon">
         <input type="search" name="query" value="{{ query }}"
                placeholder="Search company or position" autofocus>
+        {% if status %}
+            <input type="hidden" name="status" value="{{ status }}">
+        {% endif %}
     </form>
 
-    {% if query %}
+    <div class="filter-chips">
+        <a href="{{ url_for('search', query=query) }}"
+           class="chip {% if not status %}chip-active{% endif %}">All</a>
+        {% for s in statuses %}
+            <a href="{{ url_for('search', query=query, status=s) }}"
+               class="chip {% if status == s %}chip-active{% endif %}">{{ s }}</a>
+        {% endfor %}
+    </div>
+
+    {% if query or status %}
         <p class="application-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }}</p>
 
         <div class="application-list">
@@ -27,14 +39,14 @@
             {% else %}
                 <div class="search-empty">
                     <p class="search-empty-title">No matches</p>
-                    <p>Try a different company or position.</p>
+                    <p>Try a different company, position or status.</p>
                 </div>
             {% endfor %}
         </div>
     {% else %}
         <div class="search-empty">
             <p class="search-empty-title">Find an application</p>
-            <p>Search by company or position.</p>
+            <p>Search by company or position, or tap a status.</p>
         </div>
     {% endif %}
 </main>
