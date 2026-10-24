@@ -34,8 +34,7 @@
             <img src="/static/graphics/view.svg" alt="" class="nav-icon">
             <span>Applications</span>
         </a>
-
-        <a href="{{ url_for('search') }}" class="nav-item">
+            <a href="{{ url_for('search') }}" class="nav-item {% if request.endpoint == 'search' %}active{% endif %}">
             <img src="/static/graphics/magnifying_glass.svg" alt="" class="nav-icon">
             <span>Search</span>
         </a>
