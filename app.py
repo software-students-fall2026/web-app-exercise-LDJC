@@ -3,7 +3,8 @@ import re
 import certifi
 from dotenv import load_dotenv
 from flask import Flask, render_template, request, redirect, url_for
-from flask_login import LoginManager, UserMixin
+from flask_login import LoginManager, UserMixin, current_user, login_user
+from werkzeug.security import generate_password_hash
 import pymongo
 from bson.objectid import ObjectId
 
@@ -43,6 +44,34 @@ def create_app():
         except Exception:
             return None
         return User(user_doc) if user_doc else None
+
+    @app.route("/register", methods=["GET", "POST"])
+    def register():
+        if current_user.is_authenticated:
+            return redirect(url_for("home"))
+
+        error = None
+        if request.method == "POST":
+            username = request.form.get("username", "").strip().lower()
+            password = request.form.get("password", "")
+
+            if db is None:
+                return "Database connection unavailable", 503
+
+            if not username or len(password) < 6:
+                error = "Enter a username and a password of at least 6 characters."
+            elif db.users.find_one({"username": username}):
+                error = "That username is already taken."
+            else:
+                result = db.users.insert_one({
+                    "username": username,
+                    "password_hash": generate_password_hash(password),
+                })
+                login_user(User({"_id": result.inserted_id, "username": username}))
+                return redirect(url_for("home"))
+
+        return render_template("register.html", error=error)
+
 
     @app.route("/")
     def home():

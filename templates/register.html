@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/auth.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="auth-page">
+    <h1>Create account</h1>
+    <p class="auth-subtitle">Keep every job application in one place.</p>
+
+    {% if error %}
+        <p class="auth-error">{{ error }}</p>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('register') }}" class="auth-form">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username"
+               value="{{ request.form.get('username', '') }}"
+               autocomplete="username" required>
+
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password"
+               minlength="6" autocomplete="new-password" required>
+
+        <button type="submit">Sign up</button>
+    </form>
+</main>
+{% endblock %}
