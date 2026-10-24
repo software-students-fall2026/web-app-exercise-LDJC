@@ -28,9 +28,18 @@ def create_app():
     @app.route("/")
     def home():
         applications = []
-        if db is not None:
-            applications = list(db.applications.find().sort("_id", -1)) #decending order
 
+        if db is not None:
+            applications = list(db.applications.find())
+
+            # Sort applications by deadline
+            def get_deadline(application):
+                if application.get("application_deadline"):
+                    return application["application_deadline"]
+                else:
+                    return "9999-12-31"
+
+            applications.sort(key=get_deadline, reverse = True)
         return render_template("index.html", applications=applications)
     
     @app.route("/applications/<app_id>")
@@ -127,21 +136,15 @@ def create_app():
             return redirect(url_for("application_detail", app_id=app_id))
 
         return render_template("edit.html",application=application)
-
-
+    
+    @app.route("/search")
+    def search():
+        return render_template("search.html")
 
 
     return app
 
 app = create_app()
-
-
-
-
-
-
-
-
-
+ 
 if __name__ == "__main__":
     app.run(debug=True)
