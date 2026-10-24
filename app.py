@@ -100,15 +100,22 @@ def create_app():
     @app.route("/search")
     def search():
         query = request.args.get("query", "").strip()
+        status = request.args.get("status", "")
+        statuses = ["Wishlist", "Applied", "Interview", "Offer", "Rejected"]
         results = []
 
-        if query and db is not None:
-            pattern = {"$regex": re.escape(query), "$options": "i"}
-            results = list(db.applications.find(
-                {"$or": [{"company": pattern}, {"position": pattern}]}
-            ))
+        if (query or status) and db is not None:
+            filters = {}
+            if query:
+                pattern = {"$regex": re.escape(query), "$options": "i"}
+                filters["$or"] = [{"company": pattern}, {"position": pattern}]
+            if status:
+                filters["status"] = status
+            results = list(db.applications.find(filters))
 
-        return render_template("search.html", query=query, results=results)
+        return render_template("search.html", query=query, status=status,
+                               statuses=statuses, results=results)
+
 
 
     @app.route("/applications/<app_id>/edit", methods=["GET", "POST"])
