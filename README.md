@@ -83,4 +83,6 @@ Check that the terminal prints `Connected to MongoDB!`, then open [http://127.0.
 To stop the app, press `Ctrl+C`.
 
 ## Task boards
-See instructions. Delete this line and place a link to the task boards here.
+
+- Link to the [Sprint 1 task board.](https://github.com/orgs/software-students-fall2026/projects/8/views/2)
+- Link to the [Sprint 2 task board.](https://github.com/orgs/software-students-fall2026/projects/8/views/3)
