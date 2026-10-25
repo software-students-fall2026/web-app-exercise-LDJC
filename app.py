@@ -107,7 +107,7 @@ def create_app():
         applications = []
 
         if db is not None:
-            applications = list(db.applications.find())
+            applications = list(db.applications.find({"user_id": current_user.id}))
 
             # Sort applications by deadline
             def get_deadline(application):
@@ -120,13 +120,14 @@ def create_app():
         return render_template("index.html", applications=applications)
     
     @app.route("/applications/<app_id>")
+    @login_required
     def application_detail(app_id):
 
         if db is None:
             return "Database connection unavailable", 503
 
         try:
-            application = db.applications.find_one({"_id": ObjectId(app_id)})
+            application = db.applications.find_one({"_id": ObjectId(app_id), "user_id": current_user.id})
         except Exception:
             application = None
 
@@ -137,6 +138,7 @@ def create_app():
     
     
     @app.route("/applications/new", methods=["GET", "POST"])
+    @login_required
     def add_application():
 
         if request.method == "POST":
@@ -155,6 +157,7 @@ def create_app():
                 return "Company and position are required", 400
 
             new_application = {
+                "user_id": current_user.id,  # ← new: who owns this application
                 "company": company,
                 "position": position,
                 "status": status,
@@ -174,14 +177,14 @@ def create_app():
         return render_template("add.html")
 
     @app.route("/search")
+    @login_required
     def search():
         query = request.args.get("query", "").strip()
         status = request.args.get("status", "")
         statuses = ["Wishlist", "Applied", "Interview", "Offer", "Rejected"]
         results = []
-
+        filters = {"user_id": current_user.id}
         if (query or status) and db is not None:
-            filters = {}
             if query:
                 pattern = {"$regex": re.escape(query), "$options": "i"}
                 filters["$or"] = [{"company": pattern}, {"position": pattern}]
@@ -194,13 +197,14 @@ def create_app():
 
 
     @app.route("/applications/<app_id>/edit", methods=["GET", "POST"])
+    @login_required
     def edit_application(app_id):
 
         if db is None:
             return "Database connection unavailable", 503
 
         try:
-            application = db.applications.find_one({"_id": ObjectId(app_id)})
+            application = db.applications.find_one({"_id": ObjectId(app_id), "user_id": current_user.id})
         except Exception:
             application = None
 
@@ -235,14 +239,15 @@ def create_app():
         return render_template("edit.html",application=application)
 
     @app.route("/applications/<app_id>/delete", methods=["GET", "POST"])
+    @login_required
     def delete_application(app_id):
-        application = db.applications.find_one({"_id": ObjectId(app_id)})
+        application = db.applications.find_one({"_id": ObjectId(app_id), "user_id": current_user.id})
 
         if application is None:
             return "Application not found", 404
 
         if request.method == "POST":
-            db.applications.delete_one({"_id": ObjectId(app_id)})
+            db.applications.delete_one({"_id": ObjectId(app_id), "user_id": current_user.id})
             return redirect(url_for("home"))
 
         return render_template("delete.html", application=application)
