@@ -234,6 +234,19 @@ def create_app():
 
         return render_template("edit.html",application=application)
 
+    @app.route("/applications/<app_id>/delete", methods=["GET", "POST"])
+    def delete_application(app_id):
+        application = db.applications.find_one({"_id": ObjectId(app_id)})
+
+        if application is None:
+            return "Application not found", 404
+
+        if request.method == "POST":
+            db.applications.delete_one({"_id": ObjectId(app_id)})
+            return redirect(url_for("home"))
+
+        return render_template("delete.html", application=application)
+
     return app
 
 app = create_app()
