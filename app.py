@@ -101,10 +101,8 @@ def create_app():
         logout_user()
         return redirect(url_for("login"))
 
-    
-
-
     @app.route("/")
+    @login_required
     def home():
         applications = []
 

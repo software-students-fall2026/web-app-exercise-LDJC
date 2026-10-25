@@ -14,17 +14,21 @@
 </head>
 
 <body>
-{% if request.endpoint != 'add_application' %}
-<header class="app-header">
-    <a href="{{ url_for('home') }}" class="logo-link">
-        <img
-            src="/static/graphics/jobify_logo.svg"
-            alt="Jobify"
-            class="jobify-logo"
-        >
-    </a>
-</header>
-{% endif %}
+    <header class="app-header">
+        <a href="{{ url_for('home') }}" class="logo-link">
+            <img
+                src="/static/graphics/jobify_logo.svg"
+                alt="Jobify"
+                class="jobify-logo"
+            >
+        </a>
+    
+        {% if current_user.is_authenticated %}
+        <form action="{{ url_for('logout') }}" method="POST">
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+        {% endif %}
+    </header>
 
 {% block content %}{% endblock %}
 
