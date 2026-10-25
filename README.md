@@ -18,8 +18,7 @@ python3 --version
 
 If it prints `Python 3.12.x`, move on. If the command is not found or shows an older version, install Python 3.12:
 
-- **Mac:** `brew install python@3.12` (requires Homebrew, or download it from [python.org](https://www.python.org/downloads/)
-- **Windows:** download it from [python.org](https://www.python.org/downloads/)
+- **Mac or Windows:** download it from [python.org](https://www.python.org/downloads/)
 
 ### 2. Check that Git is installed
 
