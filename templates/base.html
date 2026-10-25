@@ -24,9 +24,27 @@
         </a>
     
         {% if current_user.is_authenticated %}
-        <form action="{{ url_for('logout') }}" method="POST">
-            <button type="submit" class="logout-button">Logout</button>
-        </form>
+        <div class="profile-menu">
+            <button type="button"
+                    class="profile-button"
+                    id="profile-button"
+                    aria-label="Open profile menu"
+                    aria-expanded="false"
+                    aria-controls="profile-dropdown">
+                <img
+                    src="{{ url_for('static', filename='graphics/profile.svg') }}"
+                    alt=""
+                    class="profile-icon"
+                >
+            </button>
+            <div class="profile-dropdown" id="profile-dropdown" hidden>
+                <form action="{{ url_for('logout') }}" method="POST">
+                    <button type="submit" class="logout-option">
+                        Log out
+                    </button>
+                </form>
+            </div>
+        </div>
         {% endif %}
     </header>
 
@@ -49,6 +67,19 @@
         </a>
 
     </nav>
-
+    <script>
+        const profileButton = document.getElementById("profile-button");
+        const profileDropdown = document.getElementById("profile-dropdown");
+        if (profileButton && profileDropdown) {
+            profileButton.addEventListener("click", function () {
+                profileDropdown.hidden = !profileDropdown.hidden;
+            });
+            document.addEventListener("click", function (event) {
+                if (!event.target.closest(".profile-menu")) {
+                    profileDropdown.hidden = true;
+                }
+            });
+        }
+    </script>
 </body>
 </html>
