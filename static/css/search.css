@@ -64,3 +64,40 @@
     font-weight: 700;
     color: #1b1b1b;
 }
+/**\
+
+ */
+.chip {
+    flex-shrink: 0;
+    padding: 7px 14px;
+    border: 1px solid #d8d8d8;
+    border-radius: 20px;
+    background-color: #ffffff;
+    color: #444444;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.chip:hover {
+    border-color: #2851c9;
+}
+
+.chip-active {
+    background-color: #2851c9;
+    border-color: #2851c9;
+    color: #ffffff;
+}
+
+.search-empty {
+    margin-top: 48px;
+    text-align: center;
+    color: #666666;
+}
+
+.search-empty-title {
+    margin: 0 0 6px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1b1b1b;
+}
