@@ -5,7 +5,8 @@ A little exercise to build a web application following an agile development proc
 Jobify is a mobile web app that lets job seekers record, track and update every application they send out, keeping all the important information in one place.
 
 ## User stories
-The check out user stories, see our [project board](https://github.com/orgs/software-students-fall2026/projects/8/views/1). 
+
+The check out user stories, see our [project backlog](https://github.com/orgs/software-students-fall2026/projects/8/views/1). 
 
 ## Steps necessary to run the software
 These steps assume macOS or Linux. On Windows, run every command in WSL or Git Bash, not PowerShell, and use `python` instead of `python3`.

@@ -1,5 +1,57 @@
 {% extends "base.html" %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+{% endblock %}
+
 {% block content %}
-  <h2>Search</h2>
-  {# TODO: search box (method="GET") + results #}
+<main class="applications-page">
+    <div class="applications-heading">
+        <h1>Search</h1>
+    </div>
+
+    <form action="{{ url_for('search') }}" method="GET" class="search-bar">
+        <img src="/static/graphics/magnifying_glass.svg" alt="" class="search-icon">
+        <input type="search" name="query" value="{{ query }}"
+               placeholder="Search company or position" autofocus>
+        {% if status %}
+            <input type="hidden" name="status" value="{{ status }}">
+        {% endif %}
+    </form>
+
+    <div class="filter-chips">
+        <a href="{{ url_for('search', query=query) }}"
+           class="chip {% if not status %}chip-active{% endif %}">All</a>
+        {% for s in statuses %}
+            <a href="{{ url_for('search', query=query, status=s) }}"
+               class="chip {% if status == s %}chip-active{% endif %}">{{ s }}</a>
+        {% endfor %}
+    </div>
+
+    {% if query or status %}
+        <p class="application-count">{{ results|length }} result{{ '' if results|length == 1 else 's' }}</p>
+
+        <div class="application-list">
+            {% for application in results %}
+                <a href="{{ url_for('application_detail', app_id=application._id) }}" class="application-card">
+                    <div class="application-card-top">
+                        <p class="application-company">{{ application.company }}</p>
+                        <span class="status-badge status-{{ application.status|lower }}">{{ application.status }}</span>
+                    </div>
+                    <p class="application-position">{{ application.position }}</p>
+                </a>
+            {% else %}
+                <div class="search-empty">
+                    <p class="search-empty-title">No matches</p>
+                    <p>Try a different company, position or status.</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="search-empty">
+            <p class="search-empty-title">Find an application</p>
+            <p>Search by company or position, or tap a status.</p>
+        </div>
+    {% endif %}
+</main>
 {% endblock %}

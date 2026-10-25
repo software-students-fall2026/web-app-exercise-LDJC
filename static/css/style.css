@@ -24,7 +24,7 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
 
     background-color: #ffffff;
     border-bottom: 1px solid #dddddd;
@@ -209,9 +209,9 @@ body {
     flex-shrink: 0;
 }
 
-.bottom-nav .nav-item.active {
+.bottom-nav .nav-item:hover,
+.bottom-nav .nav-item:focus-visible {
     color: #2851c9;
-    font-weight: 700;
 }
 
 input,
@@ -225,4 +225,80 @@ button {
     width: 18px;
     height: 18px;
     object-fit: contain;
+}
+
+.profile-menu {
+    position: relative;
+}
+
+.profile-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    padding: 6px;
+    border: none;
+    background: transparent;
+
+    cursor: pointer;
+}
+
+.profile-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
+.profile-dropdown {
+    position: absolute;
+    top: 50px;
+    right: 0;
+
+    width: 160px;
+    padding: 8px;
+
+    background-color: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 12px;
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+    z-index: 1100;
+}
+
+.profile-dropdown[hidden] {
+    display: none;
+}
+
+.profile-dropdown form {
+    margin: 0;
+}
+
+.logout-option {
+    width: 100%;
+    padding: 12px;
+
+    background-color: transparent;
+    border: none;
+    border-radius: 8px;
+
+    color: #c62828;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+
+    cursor: pointer;
+}
+
+.logout-option:hover {
+    background-color: #fbe0de;
+}
+
+.profile-button:focus-visible,
+.logout-option:focus-visible {
+    outline: 2px solid #2851c9;
+    outline-offset: 2px;
 }
