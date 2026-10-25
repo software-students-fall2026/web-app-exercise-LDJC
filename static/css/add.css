@@ -6,46 +6,6 @@
     background-color: #f5f5f5;
 }
 
-.add-header {
-    height: 76px;
-    background-color: #ffffff;
-    border-bottom: 1px solid #dddddd;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    
-    position: relative;
-}
-
-.add-header h1 {
-    margin: 0;
-    font-size: 22px;
-    font-weight: 700;
-    text-align: center;
-}
-
-.back-link {
-    position: absolute;
-    left: 18px;
-
-    display: flex;
-    align-items: center;
-    gap: 4px;
-
-    color: #2851c9;
-    font-size: 17px;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.back-arrow {
-    font-size: 28px;
-    line-height: 1;
-}
-
-
 .add-content {
     padding: 22px 18px 40px;
 }
