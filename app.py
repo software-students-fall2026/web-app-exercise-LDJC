@@ -105,6 +105,7 @@ def create_app():
 
 
     @app.route("/")
+    @login_required
     def home():
         applications = []
 

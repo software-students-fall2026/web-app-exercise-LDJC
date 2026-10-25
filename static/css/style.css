@@ -209,9 +209,9 @@ body {
     flex-shrink: 0;
 }
 
-.bottom-nav .nav-item.active {
+.bottom-nav .nav-item:hover,
+.bottom-nav .nav-item:focus-visible {
     color: #2851c9;
-    font-weight: 700;
 }
 
 input,
