@@ -82,6 +82,12 @@ Check that the terminal prints `Connected to MongoDB!`, then open [http://127.0.
 
 To stop the app, press `Ctrl+C`.
 
+If you see `Address already in use` (port 5000 is often taken by AirPlay on macOS), run the app on another port and open [http://127.0.0.1:5050](http://127.0.0.1:5050) instead:
+
+```bash
+python3 -m flask --app app run --debug --port 5050
+```
+
 ## Task boards
 
 - Link to the [Sprint 1 task board.](https://github.com/orgs/software-students-fall2026/projects/8/views/2)
